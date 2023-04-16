@@ -5,7 +5,7 @@ intro = cv2.imread('frames/img1.jpeg')
 kill = cv2.imread('frames/img2.png')
 winner = cv2.imread('frames/img3.png')
 cam = cv2.VideoCapture(0)
-detector = HandTrackingModule.HandDetector(maxHands=1,detectionCon=0.77)
+detector = HandTrackingModule.HandDetector(maxHands=1, detectionCon=0.77)
 
 sqr_img = cv2.imread('img/sqr(2).png')
 mlsa = cv2.imread('img/mlsa.png')
@@ -13,21 +13,35 @@ mlsa = cv2.imread('img/mlsa.png')
 gameOver = False
 NotWon = True
 while not gameOver:
-
     cv2.imshow("Squid Game Dalgona", intro)
-    cv2.waitKey(1)
-
-    if cv2.waitKey(1) == ord('q'):
+    key = cv2.waitKey(1)
+    if key == ord('q'):
         break
 
 score = 0
 dalgona_displayed = False
 gameOver = False
 
-while NotWon and not gameOver:
+# while NotWon and not gameOver:
+#
+#     success, img = cam.read()
+#     if not success:
+#         print("Error: failed to read webcam frame")
+#         continue
+#
+#     img = cv2.flip(img, 1)
 
+while NotWon and not gameOver:
     success, img = cam.read()
-img = cv2.flip(img, 1)
+    if success:
+        img = cv2.flip(img, 1)
+        cv2.imshow("Squid Game Dalgona", img)
+        key = cv2.waitKey(10)
+        if key == ord('q'):
+            break
+    else:
+        print("Failed to read webcam frame")
+
 
 hands = detector.findHands(img)
 if hands:
