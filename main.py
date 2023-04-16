@@ -7,8 +7,8 @@ winner = cv2.imread('frames/img3.png')
 cam = cv2.VideoCapture(0)
 detector = HandTrackingModule.HandDetector(maxHands=1,detectionCon=0.77)
 
-sqr_img = cv2.imread('images/sqr(2).png')
-mlsa = cv2.imread('images/mlsa.png')
+sqr_img = cv2.imread('img/sqr(2).png')
+mlsa = cv2.imread('img/mlsa.png')
 
 gameOver = False
 NotWon = True
